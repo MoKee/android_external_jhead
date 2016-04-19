@@ -452,8 +452,8 @@ double ConvertAnyFormat(void * ValuePtr, int Format)
         case FMT_SLONG:     Value = Get32s(ValuePtr);                break;
 
         // Not sure if this is correct (never seen float used in Exif format)
-        case FMT_SINGLE:    Value = (double)*(float *)ValuePtr;      break;
-        case FMT_DOUBLE:    Value = *(double *)ValuePtr;             break;
+        case FMT_SINGLE:    Value = (double)*(float *)ValuePtr;                break;
+        case FMT_DOUBLE:    memcpy(&Value, ValuePtr, sizeof(double));  break;
 
         default:
             ErrNonfatal("Illegal format code %d",Format,0);
